@@ -10,6 +10,7 @@
 
 <helmet>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<script src="./image-slot.js"></script>
 <style>
   .page-root * { margin:0; padding:0; box-sizing:border-box; font-family:'Pretendard',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; }
   .page-root { background-color:#0c1017; color:#ffffff; line-height:1.6; overflow-x:hidden; }
@@ -30,6 +31,11 @@
   @media (max-width: 760px) { .greeting-grid { grid-template-columns:1fr; gap:24px; } }
   .cert-grid { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start; }
   @media (max-width: 760px) { .cert-grid { grid-template-columns:1fr; gap:36px; } }
+  .cert-list { display:grid; grid-template-columns:repeat(5,1fr); gap:24px; align-items:start; }
+  @media (max-width: 1100px) { .cert-list { grid-template-columns:repeat(3,1fr); gap:28px; } }
+  @media (max-width: 700px) { .cert-list { grid-template-columns:repeat(2,1fr); gap:20px; } }
+  .cert-frame--empty { background:rgba(56,189,248,0.05); border:1px dashed rgba(56,189,248,0.3); box-shadow:none; padding:8px; }
+  .cert-frame--empty::after { display:none; }
 </style>
 </helmet>
 <div class="page-root">
@@ -73,40 +79,47 @@
   </section>
 
   <section style="padding:90px 10% 110px; background:#0c1017;">
-    <div class="cert-grid" style="max-width:1000px; margin:0 auto;">
-      <div>
-        <div class="kicker">CERTIFICATION</div>
-        <h2 style="font-size:1.5rem; font-weight:700; margin-bottom:24px;">기술자 보유 및 등록 현황</h2>
-        <div style="display:flex; gap:16px; margin-bottom:16px;">
-          <div class="stat-card">
-            <div style="color:#38bdf8; font-size:2.1rem; font-weight:800;">3명</div>
-            <div style="color:#94a3b8; font-size:0.9rem; margin-top:6px;">중급기술자</div>
+    <div style="max-width:1200px; margin:0 auto;">
+      <div class="kicker">CERTIFICATION</div>
+      <h2 style="font-size:1.5rem; font-weight:700; margin-bottom:10px;">인증 및 등록 현황</h2>
+      <p style="color:#94a3b8; font-size:0.95rem; margin-bottom:36px;">삼일이엔씨가 보유한 면허 · 등록 · 확인서입니다. 카드에 마우스를 올리면 원본을 내려받을 수 있습니다.</p>
+      <div class="cert-list">
+        <div>
+          <div class="cert-frame">
+            <img src="./assets/cert-business.png" alt="사업자등록증"></img>
+            <a href="./assets/cert-business.png" download="삼일이엔씨_사업자등록증.png" class="dl-btn">다운로드</a>
           </div>
-          <div class="stat-card">
-            <div style="color:#38bdf8; font-size:2.1rem; font-weight:800;">2명</div>
-            <div style="color:#94a3b8; font-size:0.9rem; margin-top:6px;">초급기술자</div>
-          </div>
+          <h3 style="font-size:0.9rem; font-weight:700; margin-top:12px; color:#f8fafc;">사업자등록증</h3>
+          <div style="color:#7c8798; font-size:0.8rem; margin-top:4px;">국세청</div>
         </div>
-        <div class="stat-card">
-          <div style="color:#e2e8f0; font-size:0.92rem; line-height:1.8;">정보통신공사업 · 전기공사업 등록<br>소프트웨어사업자 신고 · 여성기업 확인 완료</div>
+        <div>
+          <div class="cert-frame">
+            <img src="./assets/cert-ict.png" alt="정보통신공사업등록증"></img>
+            <a href="./assets/cert-ict.png" download="삼일이엔씨_정보통신공사업등록증.png" class="dl-btn">다운로드</a>
+          </div>
+          <h3 style="font-size:0.9rem; font-weight:700; margin-top:12px; color:#f8fafc;">정보통신공사업 등록증</h3>
+          <div style="color:#7c8798; font-size:0.8rem; margin-top:4px;">2017.08 취득</div>
         </div>
-      </div>
-      <div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
-          <div>
-            <h3 style="font-size:0.9rem; font-weight:700; margin-bottom:10px; color:#f8fafc;">사업자등록증</h3>
-            <div class="cert-frame">
-              <img src="./assets/cert-business.png" alt="사업자등록증"></img>
-              <a href="./assets/cert-business.png" download="삼일이엔씨_사업자등록증.png" class="dl-btn">다운로드</a>
-            </div>
+        <div>
+          <div class="cert-frame cert-frame--empty">
+            <image-slot id="cert-electric" shape="rounded" radius="6" placeholder="전기공사업 등록증 이미지를 올려주세요"></image-slot>
           </div>
-          <div>
-            <h3 style="font-size:0.9rem; font-weight:700; margin-bottom:10px; color:#f8fafc;">정보통신공사업등록증</h3>
-            <div class="cert-frame">
-              <img src="./assets/cert-ict.png" alt="정보통신공사업등록증"></img>
-              <a href="./assets/cert-ict.png" download="삼일이엔씨_정보통신공사업등록증.png" class="dl-btn">다운로드</a>
-            </div>
+          <h3 style="font-size:0.9rem; font-weight:700; margin-top:12px; color:#f8fafc;">전기공사업 등록증</h3>
+          <div style="color:#7c8798; font-size:0.8rem; margin-top:4px;">2021.03 취득</div>
+        </div>
+        <div>
+          <div class="cert-frame cert-frame--empty">
+            <image-slot id="cert-software" shape="rounded" radius="6" placeholder="소프트웨어사업자 신고확인서 이미지를 올려주세요"></image-slot>
           </div>
+          <h3 style="font-size:0.9rem; font-weight:700; margin-top:12px; color:#f8fafc;">소프트웨어사업자 신고확인서</h3>
+          <div style="color:#7c8798; font-size:0.8rem; margin-top:4px;">2017.08 신고</div>
+        </div>
+        <div>
+          <div class="cert-frame cert-frame--empty">
+            <image-slot id="cert-women" shape="rounded" radius="6" placeholder="여성기업 확인서 이미지를 올려주세요"></image-slot>
+          </div>
+          <h3 style="font-size:0.9rem; font-weight:700; margin-top:12px; color:#f8fafc;">여성기업 확인서</h3>
+          <div style="color:#7c8798; font-size:0.8rem; margin-top:4px;">한국여성경제인협회 충북지회</div>
         </div>
       </div>
     </div>

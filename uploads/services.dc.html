@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  .page-root * { margin:0; padding:0; box-sizing:border-box; font-family:'Pretendard',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; }
+  .page-root { background-color:#0c1017; color:#ffffff; line-height:1.6; overflow-x:hidden; }
+  .kicker { color:#38bdf8; font-weight:700; font-size:0.85rem; letter-spacing:0.08em; margin-bottom:10px; }
+  .svc-list { list-style:none; display:flex; flex-direction:column; gap:10px; margin-top:22px; }
+  .svc-list li { display:flex; align-items:baseline; gap:10px; font-size:0.9rem; color:#94a3b8; }
+  .svc-bullet { width:5px; height:5px; border-radius:50%; background:#38bdf8; flex-shrink:0; }
+  .ref-chip { display:inline-block; padding:7px 14px; border-radius:100px; font-size:0.8rem; color:#cbd5e1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); }
+  .proc-step { background:rgba(56,189,248,0.06); border:1px solid rgba(56,189,248,0.2); border-radius:12px; padding:22px 24px; }
+  .svc-grid { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; }
+  @media (max-width: 760px) { .svc-grid { grid-template-columns:1fr; gap:28px; } .svc-grid > div { order:0 !important; } }
+</style>
+</helmet>
+<div class="page-root">
+
+  <dc-import name="Header" current="services" hint-size="100%,90px"></dc-import>
+
+  <section style="position:relative; padding:170px 10% 90px; background:#0c1017; overflow:hidden;">
+    <div style="position:absolute; inset:0; background:url('./assets/pattern-wave.jpg') no-repeat center right/cover; opacity:0.35;"></div>
+    <div style="position:absolute; inset:0; background:linear-gradient(90deg, #0c1017 10%, rgba(12,16,23,0.6) 55%, rgba(12,16,23,0.85) 100%);"></div>
+    <div style="position:relative; z-index:2; max-width:1000px; margin:0 auto;">
+      <div class="kicker">SERVICES</div>
+      <h1 style="font-size:2.3rem; font-weight:800; letter-spacing:-1px; margin-bottom:18px;">사업분야</h1>
+      <p style="font-size:1rem; color:#cbd5e1; max-width:560px; word-break:keep-all;">정보통신 인프라의 설계부터 시공, 유지보수까지. ㈜삼일이엔씨는 네 개 전문 분야에서 현장 여건에 맞는 최적의 시공을 수행합니다.</p>
+    </div>
+  </section>
+
+  <sc-for list="{{ services }}" as="s" hint-placeholder-count="4">
+    <section style="padding:90px 10%; background:{{ s.bg }}; border-top:1px solid rgba(56,189,248,0.12);">
+      <div class="svc-grid" style="max-width:1000px; margin:0 auto;">
+        <div style="{{ s.textOrder }}">
+          <div class="kicker">{{ s.num }}</div>
+          <h2 style="font-size:1.6rem; font-weight:800; margin-bottom:14px; color:#f8fafc; letter-spacing:-0.5px;">{{ s.title }}</h2>
+          <p style="font-size:0.95rem; color:#94a3b8; line-height:1.85; word-break:keep-all;">{{ s.desc }}</p>
+          <ul class="svc-list">
+            <sc-for list="{{ s.points }}" as="p" hint-placeholder-count="3">
+              <li><span class="svc-bullet"></span>{{ p }}</li>
+            </sc-for>
+          </ul>
+          <div style="margin-top:28px;">
+            <div style="font-size:0.78rem; font-weight:700; letter-spacing:0.08em; color:#64748b; margin-bottom:12px;">주요 실적 · 레퍼런스</div>
+            <div style="display:flex; flex-wrap:wrap; gap:8px;">
+              <sc-for list="{{ s.refs }}" as="r" hint-placeholder-count="3">
+                <span class="ref-chip">{{ r }}</span>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+        <div style="{{ s.imgOrder }} border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,0.08);">
+          <img src="{{ s.imgSrc }}" alt="{{ s.title }}" style="width:100%; height:320px; object-fit:cover; display:block;"></img>
+        </div>
+      </div>
+    </section>
+  </sc-for>
+
+  <section style="padding:90px 10%; background:linear-gradient(180deg, #131a26 0%, #1a2333 100%); border-top:1px solid rgba(56,189,248,0.15); border-bottom:1px solid rgba(56,189,248,0.15);">
+    <div style="max-width:1000px; margin:0 auto;">
+      <div class="kicker" style="color:#7dd3fc;">PROCESS</div>
+      <h2 style="font-size:1.5rem; font-weight:700; margin-bottom:32px; color:#f1f5f9;">시공 프로세스</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:16px;">
+        <sc-for list="{{ process }}" as="p" hint-placeholder-count="5">
+          <div class="proc-step">
+            <div style="color:#7dd3fc; font-size:0.78rem; font-weight:800; letter-spacing:0.1em; margin-bottom:8px;">{{ p.step }}</div>
+            <div style="color:#f1f5f9; font-size:1rem; font-weight:700; margin-bottom:6px;">{{ p.title }}</div>
+            <div style="color:#94a3b8; font-size:0.82rem; line-height:1.6;">{{ p.desc }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:90px 10% 110px; background:#0c1017;">
+    <div style="max-width:1000px; margin:0 auto; display:grid; grid-template-columns:1.2fr 0.8fr; gap:48px; align-items:center;">
+      <div>
+        <div class="kicker">CONTACT</div>
+        <h2 style="font-size:1.6rem; font-weight:800; line-height:1.4; margin-bottom:14px;">프로젝트를 계획하고 계신가요?</h2>
+        <p style="font-size:0.95rem; color:#94a3b8; word-break:keep-all;">현장 상황에 맞는 최적의 시공 방안과 견적을 안내해 드립니다. 부담 없이 문의해 주십시오.</p>
+      </div>
+      <div style="display:flex; gap:14px;">
+        <a href="./contact.dc.html" style="padding:14px 28px; border-radius:6px; font-size:0.95rem; font-weight:600; display:inline-block; white-space:nowrap; background-color:#00b4d8; color:#0c1017; border:1px solid #00b4d8; text-decoration:none;">문의하기</a>
+        <a href="./company.dc.html" style="padding:14px 28px; border-radius:6px; font-size:0.95rem; font-weight:600; display:inline-block; white-space:nowrap; background-color:rgba(255,255,255,0.05); color:#ffffff; border:1px solid rgba(255,255,255,0.3); text-decoration:none;">회사소개</a>
+      </div>
+    </div>
+  </section>
+
+  <dc-import name="Footer" hint-size="100%,140px"></dc-import>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1600}}">
+class Component extends DCLogic {
+  renderVals() {
+    const raw = [
+      {
+        num: "01",
+        title: "랜공사 · 광케이블 공사",
+        desc: "사무실, 공장, 데이터센터 등 구내 통신망의 UTP 배선부터 광케이블 선로 구축까지 통신 인프라 전반을 시공합니다.",
+        points: ["구내 통신망 설계 및 UTP 배선 시공", "광케이블 포설 및 융착 접속", "성능 측정·인증 시험 및 준공 도서 제출"],
+        refs: ["관공서 구내통신망 구축", "산업단지 광선로 공사", "데이터센터 배선 공사"],
+        imgSrc: "./assets/svc-lan-cable.png"
+      },
+      {
+        num: "02",
+        title: "자동제어",
+        desc: "빌딩자동화(BAS) 및 각종 설비 자동제어 시스템을 설계·구축하고, 계장제어장치와 프로세서제어반을 직접 생산합니다.",
+        points: ["공조·설비 자동제어 시스템 구축", "계장제어장치 및 프로세서제어반 제작", "원격 모니터링 및 관제 연동"],
+        refs: ["정수장 계장제어 공사", "빌딩 자동제어(BAS)", "프로세서제어반 납품"],
+        imgSrc: "./assets/svc-control.png"
+      },
+      {
+        num: "03",
+        title: "버스정보안내기",
+        desc: "버스정보안내단말기(BIT)를 직접 생산하여 설치하고, 통신망 연동 및 운영 중 유지보수까지 일괄 대응합니다.",
+        points: ["정류소 안내단말기 제작 및 설치", "통신망 연동 및 실시간 정보 송출", "정기 점검 및 장애 대응"],
+        refs: ["지자체 BIT 설치 사업", "BIT 유지보수 용역", "직접생산 확인 보유"],
+        imgSrc: "./assets/svc-bis.png"
+      },
+      {
+        num: "04",
+        title: "CCTV",
+        desc: "방범·보안 목적의 영상감시 시스템을 현장 여건에 맞게 설계하고, 관제센터 연동까지 구축합니다.",
+        points: ["현장 맞춤 카메라 배치 설계", "영상저장장치(NVR/DVR) 구축", "관제센터 연동 및 운영 지원"],
+        refs: ["방범용 CCTV 설치", "학교·공공시설 영상감시", "관제센터 연동 공사"],
+        imgSrc: "./assets/svc-cctv.jpg"
+      }
+    ];
+    return {
+      services: raw.map((s, i) => ({
+        ...s,
+        imgId: "svc-img-" + i,
+        bg: i % 2 === 0 ? "#0c1017" : "#111826",
+        textOrder: i % 2 === 1 ? "order:2;" : "",
+        imgOrder: i % 2 === 1 ? "order:1;" : ""
+      })),
+      process: [
+        { step: "STEP 01", title: "현장 조사", desc: "현장 여건과 요구사항을 확인합니다." },
+        { step: "STEP 02", title: "설계 · 견적", desc: "최적 공법을 제안하고 견적을 산출합니다." },
+        { step: "STEP 03", title: "시공", desc: "관련 규정을 준수해 안전하게 시공합니다." },
+        { step: "STEP 04", title: "시험 · 준공", desc: "성능 시험 후 준공 도서를 제출합니다." },
+        { step: "STEP 05", title: "유지보수", desc: "준공 이후 점검과 장애 대응을 지원합니다." }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

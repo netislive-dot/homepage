@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  .page-root * { margin:0; padding:0; box-sizing:border-box; font-family:'Pretendard',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; }
+  .page-root { background-color:#0c1017; color:#ffffff; line-height:1.6; overflow-x:hidden; }
+  .kicker { color:#38bdf8; font-weight:700; font-size:0.85rem; letter-spacing:0.08em; margin-bottom:10px; }
+  .timeline-item { position:relative; padding-left:28px; padding-bottom:28px; border-left:2px solid rgba(56,189,248,0.25); }
+  .timeline-item:last-child { border-left-color:transparent; padding-bottom:0; }
+  .timeline-dot { position:absolute; left:-7px; top:2px; width:12px; height:12px; border-radius:50%; background:#38bdf8; box-shadow:0 0 0 4px rgba(56,189,248,0.15); }
+  .stat-card { background:rgba(56,189,248,0.06); border:1px solid rgba(56,189,248,0.2); border-radius:12px; padding:24px 28px; flex:1; }
+  .cert-frame { position:relative; background:#f8fafc; border-radius:14px; padding:10px; box-shadow:0 12px 32px rgba(0,0,0,0.4); aspect-ratio:3/4; overflow:hidden; }
+  .cert-frame img { width:100%; height:100%; object-fit:cover; object-position:top center; display:block; border-radius:6px; filter:blur(2px); transition:filter 0.3s ease, transform 0.3s ease; }
+  .cert-frame:hover img { filter:blur(3px) brightness(0.55); transform:scale(1.03); }
+  .cert-frame::after { content:''; position:absolute; inset:0; background:rgba(12,16,23,0); transition:background 0.3s ease; }
+  .cert-frame:hover::after { background:rgba(12,16,23,0.35); }
+  .dl-btn { position:absolute; left:50%; top:50%; transform:translate(-50%,-46%); z-index:3; padding:11px 20px; border-radius:6px; font-size:0.85rem; font-weight:700; color:#0c1017; background:#00b4d8; border:1px solid #00b4d8; text-decoration:none; white-space:nowrap; opacity:0; pointer-events:none; transition:opacity 0.3s ease, transform 0.3s ease; }
+  .cert-frame:hover .dl-btn { opacity:1; pointer-events:auto; transform:translate(-50%,-50%); }
+  .dl-btn:hover { background:#48cae4; border-color:#48cae4; }
+  .greeting-grid { display:grid; grid-template-columns:0.9fr 1.4fr; gap:48px; align-items:start; }
+  @media (max-width: 760px) { .greeting-grid { grid-template-columns:1fr; gap:24px; } }
+  .cert-grid { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start; }
+  @media (max-width: 760px) { .cert-grid { grid-template-columns:1fr; gap:36px; } }
+</style>
+</helmet>
+<div class="page-root">
+
+  <dc-import name="Header" current="company" hint-size="100%,90px"></dc-import>
+
+  <section style="position:relative; padding:170px 10% 90px; background:#0c1017; overflow:hidden;">
+    <div style="position:absolute; inset:0; background:url('./assets/pattern-wave.jpg') no-repeat center right/cover; opacity:0.35;"></div>
+    <div style="position:absolute; inset:0; background:linear-gradient(90deg, #0c1017 10%, rgba(12,16,23,0.6) 55%, rgba(12,16,23,0.85) 100%);"></div>
+    <div style="position:relative; z-index:2; max-width:1000px; margin:0 auto 70px;">
+      <div class="kicker">COMPANY</div>
+      <h1 style="font-size:2.3rem; font-weight:800; letter-spacing:-1px;">회사소개</h1>
+    </div>
+    <div class="greeting-grid" style="position:relative; z-index:2; max-width:1000px; margin:0 auto;">
+      <div>
+        <div class="kicker">GREETING</div>
+        <h2 style="font-size:1.6rem; font-weight:800; line-height:1.4;">신뢰를 바탕으로<br>완벽한 시공을 약속합니다</h2>
+      </div>
+      <div style="position:relative; padding:36px 40px; background:rgba(12,16,23,0.72); backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.08); border-left:3px solid #38bdf8; border-radius:4px 12px 12px 4px;">
+        <div style="font-size:3rem; color:rgba(56,189,248,0.35); font-weight:900; line-height:0; position:absolute; top:24px; left:24px;">“</div>
+        <p style="font-size:1rem; color:#cbd5e1; line-height:2; position:relative; z-index:1; padding-left:8px;">㈜삼일이엔씨는 정보통신·전기공사·자동제어공사를 주력으로 매년 성장해 나가고 있습니다. 안전을 최우선으로 하는 신뢰를 바탕으로, 변화하는 미래 기술을 선도하며 최고의 품질을 향해 나아가는 기업으로 계속 성장해 가겠습니다.</p>
+        <p style="margin-top:28px; text-align:right; color:#f8fafc; font-weight:700; letter-spacing:0.1em;">㈜삼일이엔씨 임직원일동</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:90px 10%; background:linear-gradient(180deg, #131a26 0%, #1a2333 100%); border-top:1px solid rgba(56,189,248,0.15); border-bottom:1px solid rgba(56,189,248,0.15);">
+    <div style="max-width:1000px; margin:0 auto;">
+      <div class="kicker" style="color:#7dd3fc;">HISTORY</div>
+      <h2 style="font-size:1.5rem; font-weight:700; margin-bottom:32px; color:#f1f5f9;">연혁</h2>
+      <div>
+        <sc-for list="{{ history }}" as="h" hint-placeholder-count="6">
+          <div class="timeline-item" style="border-left:2px solid rgba(125,211,252,0.25);">
+            <div class="timeline-dot" style="background:#7dd3fc; box-shadow:0 0 0 4px rgba(125,211,252,0.15);"></div>
+            <div style="color:#7dd3fc; font-weight:700; font-size:0.95rem; margin-bottom:6px;">{{ h.date }}</div>
+            <div style="color:#cbd5e1; font-size:0.92rem; white-space:pre-line;">{{ h.desc }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:90px 10% 110px; background:#0c1017;">
+    <div class="cert-grid" style="max-width:1000px; margin:0 auto;">
+      <div>
+        <div class="kicker">CERTIFICATION</div>
+        <h2 style="font-size:1.5rem; font-weight:700; margin-bottom:24px;">기술자 보유 및 등록 현황</h2>
+        <div style="display:flex; gap:16px; margin-bottom:16px;">
+          <div class="stat-card">
+            <div style="color:#38bdf8; font-size:2.1rem; font-weight:800;">3명</div>
+            <div style="color:#94a3b8; font-size:0.9rem; margin-top:6px;">중급기술자</div>
+          </div>
+          <div class="stat-card">
+            <div style="color:#38bdf8; font-size:2.1rem; font-weight:800;">2명</div>
+            <div style="color:#94a3b8; font-size:0.9rem; margin-top:6px;">초급기술자</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div style="color:#e2e8f0; font-size:0.92rem; line-height:1.8;">정보통신공사업 · 전기공사업 등록<br>소프트웨어사업자 신고 · 여성기업 확인 완료</div>
+        </div>
+      </div>
+      <div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+          <div>
+            <h3 style="font-size:0.9rem; font-weight:700; margin-bottom:10px; color:#f8fafc;">사업자등록증</h3>
+            <div class="cert-frame">
+              <img src="./assets/cert-business.png" alt="사업자등록증"></img>
+              <a href="./assets/cert-business.png" download="삼일이엔씨_사업자등록증.png" class="dl-btn">다운로드</a>
+            </div>
+          </div>
+          <div>
+            <h3 style="font-size:0.9rem; font-weight:700; margin-bottom:10px; color:#f8fafc;">정보통신공사업등록증</h3>
+            <div class="cert-frame">
+              <img src="./assets/cert-ict.png" alt="정보통신공사업등록증"></img>
+              <a href="./assets/cert-ict.png" download="삼일이엔씨_정보통신공사업등록증.png" class="dl-btn">다운로드</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <dc-import name="Footer" hint-size="100%,140px"></dc-import>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1600}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      history: [
+        { date: "2017.06", desc: "주식회사 삼일이엔씨 설립" },
+        { date: "2017.08", desc: "정보통신공사업 면허 취득 및 한국정보통신공사협회 가입" },
+        { date: "2017.08", desc: "소프트웨어사업자 신고확인 [직접생산 소프트웨어 유지 및 지원서비스외]" },
+        { date: "2017.08", desc: "여성기업확인 [한국여성경제인협회 충북지회]" },
+        { date: "2021.03", desc: "전기공사업 면허 취득" },
+        { date: "2026.05", desc: "버스정보안내기 직접생산 보유\n계장제어장치 직접생산 보유\n프로세서제어반 직접생산 보유" }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

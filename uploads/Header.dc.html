@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  .header-root * { margin:0; padding:0; box-sizing:border-box; font-family:'Pretendard',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; }
+  .header-root nav li { position:relative; }
+  .header-root nav a { position:relative; transition:color 0.25s ease; display:inline-block; padding-bottom:4px; }
+  .header-root nav a::after { content:''; position:absolute; left:0; bottom:0; width:100%; height:2px; background:#38bdf8; transform:scaleX(0); transform-origin:right; transition:transform 0.3s ease; }
+  .header-root nav a:hover, .header-root nav a.active { color:#38bdf8; font-weight:700; }
+  .header-root nav a:hover::after, .header-root nav a.active::after { transform:scaleX(1); transform-origin:left; }
+  .header-burger { display:none; }
+  .header-mobile-nav { display:none; }
+  @media (max-width: 860px) {
+    .header-nav-desktop { display:none !important; }
+    .header-burger { display:flex !important; }
+    .header-root { padding-left:20px !important; padding-right:20px !important; }
+  }
+  .burger-line { width:24px; height:2px; background:#fff; transition:all 0.3s ease; }
+  .mobile-overlay { position:fixed; inset:0; background:#0c1017; z-index:2000; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:32px; opacity:0; pointer-events:none; transition:opacity 0.3s ease; }
+  .mobile-overlay.open { opacity:1; pointer-events:auto; }
+  .mobile-overlay a { font-size:1.5rem; font-weight:700; color:#cbd5e1; text-decoration:none; }
+  .mobile-overlay a.active { color:#38bdf8; }
+  .mobile-close { position:absolute; top:24px; right:24px; width:44px; height:44px; display:flex; align-items:center; justify-content:center; background:transparent; border:none; cursor:pointer; }
+</style>
+</helmet>
+<header class="header-root" style="position:fixed; top:0; left:0; width:100%; display:flex; justify-content:space-between; align-items:center; padding:20px 80px; z-index:1000; background:linear-gradient(180deg, rgba(12,16,23,0.9) 0%, rgba(12,16,23,0) 100%); backdrop-filter:blur(8px);">
+  <a href="{{ homeHref }}" style="display:flex; align-items:center; gap:12px; font-weight:700; font-size:1.25rem; letter-spacing:-0.5px; color:#fff; text-decoration:none; white-space:nowrap;">
+    (주)삼일이엔씨
+  </a>
+  <nav class="header-nav-desktop">
+    <ul style="display:flex; list-style:none; gap:40px;">
+      <li><a href="{{ homeHref }}" class="{{ homeActive }}" style="font-size:0.95rem; font-weight:500; color:#cbd5e1; text-decoration:none;">HOME</a></li>
+      <li><a href="{{ companyHref }}" class="{{ companyActive }}" style="font-size:0.95rem; font-weight:500; color:#cbd5e1; text-decoration:none;">회사소개</a></li>
+      <li><a href="{{ servicesHref }}" class="{{ servicesActive }}" style="font-size:0.95rem; font-weight:500; color:#cbd5e1; text-decoration:none;">사업분야</a></li>
+      <li><a href="{{ contactHref }}" class="{{ contactActive }}" style="font-size:0.95rem; font-weight:500; color:#cbd5e1; text-decoration:none;">고객센터</a></li>
+    </ul>
+  </nav>
+  <button class="header-burger" onClick="{{ openMenu }}" aria-label="메뉴 열기" style="flex-direction:column; gap:6px; width:44px; height:44px; align-items:center; justify-content:center; background:transparent; border:none; cursor:pointer;">
+    <span class="burger-line"></span>
+    <span class="burger-line"></span>
+    <span class="burger-line"></span>
+  </button>
+</header>
+
+<div class="mobile-overlay {{ overlayClass }}">
+  <button class="mobile-close" onClick="{{ closeMenu }}" aria-label="메뉴 닫기">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 4L20 20M20 4L4 20" stroke="#fff" stroke-width="2" stroke-linecap="round"></path></svg>
+  </button>
+  <a href="{{ homeHref }}" class="{{ homeActive }}">HOME</a>
+  <a href="{{ companyHref }}" class="{{ companyActive }}">회사소개</a>
+  <a href="{{ servicesHref }}" class="{{ servicesActive }}">사업분야</a>
+  <a href="{{ contactHref }}" class="{{ contactActive }}">고객센터</a>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:90},&quot;current&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;'home'|'company'|'services'|'contact'&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;company&quot;,&quot;services&quot;,&quot;contact&quot;]}}">
+class Component extends DCLogic {
+  state = { open: false };
+  renderVals() {
+    const c = this.props.current || "home";
+    return {
+      homeHref: "./index.dc.html",
+      companyHref: "./company.dc.html",
+      servicesHref: "./services.dc.html",
+      contactHref: "./contact.dc.html",
+      homeActive: c === "home" ? "active" : "",
+      companyActive: c === "company" ? "active" : "",
+      servicesActive: c === "services" ? "active" : "",
+      contactActive: c === "contact" ? "active" : "",
+      overlayClass: this.state.open ? "open" : "",
+      openMenu: () => this.setState({ open: true }),
+      closeMenu: () => this.setState({ open: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

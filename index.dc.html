@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  .page-root * { margin:0; padding:0; box-sizing:border-box; font-family:'Pretendard',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; }
+  .page-root { background-color:#0c1017; color:#ffffff; line-height:1.6; overflow-x:hidden; }
+  .btn-primary:hover { background-color:#48cae4 !important; border-color:#48cae4 !important; box-shadow:0 0 20px rgba(0,180,216,0.4); }
+  .btn-outline:hover { background-color:rgba(255,255,255,0.15) !important; border-color:#ffffff !important; }
+  .feature-card:hover { transform:translateY(-5px); border-color:rgba(56,189,248,0.4) !important; }
+  @media (max-width: 768px) {
+    .hero-title { font-size:2.2rem !important; }
+  }
+</style>
+</helmet>
+<div class="page-root">
+
+  
+
+  <dc-import name="Header" current="home" hint-size="100%,90px"></dc-import>
+  <section style="position:relative; width:100%; height:100vh; overflow:hidden; display:flex; align-items:flex-end; padding:0 10% 80px;">
+    <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:url('./assets/hero-bg.png') no-repeat center center/cover; filter:{{ heroFilter }};"></div>
+    <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:{{ heroOverlay }}; z-index:1;"></div>
+    <div style="position:relative; z-index:2; max-width:700px; margin-top:40px;">
+      <h1 class="hero-title" style="font-size:3rem; font-weight:800; line-height:1.3; margin-bottom:24px; word-break:keep-all; letter-spacing:-1px; text-shadow:0 2px 12px rgba(0,0,0,0.5);">신뢰할 수 있는 정보통신<br>인프라 파트너 삼일이엔씨</h1>
+      <p style="font-size:1.1rem; color:#e2e8f0; margin-bottom:40px; word-break:keep-all; font-weight:400;">데이터센터 · 광케이블 · 자동제어 설계부터 시공 · 유지보수까지 한 번에 책임지는 정보통신 종합 선두기업</p>
+      <div style="display:flex; gap:16px;">
+        <a href="./services.dc.html" style="padding:14px 28px; border-radius:6px; font-size:0.95rem; font-weight:600; display:inline-block; white-space:nowrap; width:max-content; background-color:{{ accentColor }}; color:#0c1017; border:1px solid {{ accentColor }}; text-decoration:none;">사업분야 보기</a>
+        <a href="./contact.dc.html" class="btn-outline" style="padding:14px 28px; border-radius:6px; font-size:0.95rem; font-weight:600; display:inline-block; white-space:nowrap; width:max-content; background-color:rgba(255,255,255,0.05); color:#ffffff; border:1px solid rgba(255,255,255,0.3); backdrop-filter:blur(4px); text-decoration:none;">견적문의</a>
+      </div>
+    </div>
+  </section>
+
+  <section style="position:relative; z-index:2; padding:80px 10%; background-color:#0c1017; display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:20px;">
+    <sc-for list="{{ features }}" as="f" hint-placeholder-count="3">
+      <div style="background:{{ cardBg }}; border:1px solid {{ cardBorder }}; border-radius:12px; padding:28px 24px; backdrop-filter:{{ cardBlur }}; transition:transform 0.3s ease, border-color 0.3s ease;" style-hover="border-color:{{ accentColor }}; transform:translateY(-5px);">
+        <h3 style="font-size:1.05rem; margin-bottom:10px; color:{{ accentColor }};">{{ f.title }}</h3>
+        <p style="font-size:0.85rem; color:#64748b; line-height:1.6;">{{ f.desc }}</p>
+      </div>
+    </sc-for>
+  </section>
+
+  <dc-import name="Footer" hint-size="100%,140px"></dc-import>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#00b4d8&quot;,&quot;options&quot;:[&quot;#00b4d8&quot;,&quot;#00c896&quot;,&quot;#6366f1&quot;,&quot;#f5a623&quot;],&quot;tsType&quot;:&quot;string&quot;},&quot;heroMood&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;cinematic&quot;,&quot;options&quot;:[&quot;cinematic&quot;,&quot;vivid&quot;,&quot;minimal&quot;],&quot;tsType&quot;:&quot;string&quot;},&quot;cardStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;glass&quot;,&quot;options&quot;:[&quot;glass&quot;,&quot;solid&quot;,&quot;outline&quot;],&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accentColor ?? '#00b4d8';
+    const mood = this.props.heroMood ?? 'cinematic';
+    const cardStyle = this.props.cardStyle ?? 'glass';
+
+    const hexToRgb = (hex) => {
+      const h = hex.replace('#', '');
+      return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16)];
+    };
+    const [r,g,b] = hexToRgb(accent);
+
+    const heroOverlay = mood === 'vivid'
+      ? `linear-gradient(160deg, rgba(12,16,23,0.05) 0%, rgba(${r},${g},${b},0.35) 55%, rgba(12,16,23,0.75) 100%)`
+      : mood === 'minimal'
+      ? 'linear-gradient(180deg, rgba(12,16,23,0.6) 0%, rgba(12,16,23,0.6) 100%)'
+      : 'linear-gradient(180deg, rgba(12,16,23,0.1) 0%, rgba(12,16,23,0.3) 55%, rgba(12,16,23,0.6) 100%)';
+    const heroFilter = mood === 'vivid' ? 'saturate(1.25) contrast(1.05)' : mood === 'minimal' ? 'grayscale(0.65) contrast(1.1)' : 'none';
+
+    const cardBg = cardStyle === 'solid' ? '#161b26' : cardStyle === 'outline' ? 'transparent' : 'rgba(22,27,38,0.7)';
+    const cardBorder = cardStyle === 'outline' ? `rgba(${r},${g},${b},0.5)` : cardStyle === 'solid' ? 'rgba(255,255,255,0.04)' : 'rgba(255,255,255,0.08)';
+    const cardBlur = cardStyle === 'glass' ? 'blur(12px)' : 'none';
+
+    return {
+      accentColor: accent,
+      heroOverlay, heroFilter,
+      cardBg, cardBorder, cardBlur,
+      features: [
+        { title: "데이터센터 · 광케이블 공사", desc: "UTP/랜케이블 배선부터 광케이블 선로 구축, 포설, 융착 접속까지 수행합니다." },
+        { title: "자동제어", desc: "빌딩자동화(BAS) 및 설비 자동제어 시스템을 구축합니다." },
+        { title: "버스정보안내기", desc: "버스정보안내단말기(BIT) 설치 및 유지보수를 담당합니다." },
+        { title: "영상감시장치", desc: "방범·보안용 CCTV 설계, 시공 및 관제 시스템 연동을 지원합니다." }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

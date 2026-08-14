@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  .page-root * { margin:0; padding:0; box-sizing:border-box; font-family:'Pretendard',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; }
+  .page-root { background-color:#0c1017; color:#ffffff; line-height:1.6; overflow-x:hidden; }
+  .kicker { color:#38bdf8; font-weight:700; font-size:0.85rem; letter-spacing:0.08em; margin-bottom:10px; }
+  .contact-card { background:rgba(22,27,38,0.7); border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:32px; transition:transform 0.3s ease, border-color 0.3s ease; }
+  .contact-card:hover { transform:translateY(-5px); border-color:rgba(56,189,248,0.4); }
+  .contact-label { font-size:0.78rem; font-weight:700; letter-spacing:0.1em; color:#38bdf8; margin-bottom:12px; }
+  .contact-value { font-size:1.25rem; font-weight:700; color:#f8fafc; letter-spacing:-0.3px; }
+  .contact-value a { color:inherit; text-decoration:none; }
+  .contact-value a:hover { color:#38bdf8; }
+  .contact-sub { font-size:0.85rem; color:#64748b; margin-top:8px; }
+  .info-row { display:grid; grid-template-columns:120px 1fr; padding:14px 0; border-top:1px solid rgba(255,255,255,0.06); font-size:0.92rem; }
+  .info-row:first-child { border-top:none; }
+  .loc-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:stretch; }
+  @media (max-width: 760px) { .loc-grid { grid-template-columns:1fr; gap:20px; } }
+</style>
+</helmet>
+<div class="page-root">
+
+  <dc-import name="Header" current="contact" hint-size="100%,90px"></dc-import>
+
+  <section style="position:relative; padding:170px 10% 90px; background:#0c1017; overflow:hidden;">
+    <div style="position:absolute; inset:0; background:url('./assets/pattern-wave.jpg') no-repeat center right/cover; opacity:0.35;"></div>
+    <div style="position:absolute; inset:0; background:linear-gradient(90deg, #0c1017 10%, rgba(12,16,23,0.6) 55%, rgba(12,16,23,0.85) 100%);"></div>
+    <div style="position:relative; z-index:2; max-width:1000px; margin:0 auto;">
+      <div class="kicker">CONTACT</div>
+      <h1 style="font-size:2.3rem; font-weight:800; letter-spacing:-1px; margin-bottom:18px;">고객센터</h1>
+      <p style="font-size:1rem; color:#cbd5e1; max-width:560px; word-break:keep-all;">공사 문의, 견적 요청, 유지보수 관련 사항은 아래 연락처로 문의해 주시면 담당자가 신속히 안내해 드리겠습니다.</p>
+    </div>
+  </section>
+
+  <section style="padding:90px 10%; background:#0c1017;">
+    <div style="max-width:1000px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:20px;">
+      <div class="contact-card">
+        <div class="contact-label">TEL</div>
+        <div class="contact-value"><a href="tel:0432960031">043-296-0031</a></div>
+        <div class="contact-sub">평일 09:00 – 18:00 (점심 12:00 – 13:00)</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-label">FAX</div>
+        <div class="contact-value">043-296-0038</div>
+        <div class="contact-sub">견적서 및 서류 송부</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-label">E-MAIL</div>
+        <div class="contact-value" style="font-size:1.05rem;"><a href="mailto:ekeksl@hanmail.net">ekeksl@hanmail.net</a></div>
+        <div class="contact-sub">24시간 접수 · 순차 회신</div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:90px 10% 110px; background:linear-gradient(180deg, #131a26 0%, #1a2333 100%); border-top:1px solid rgba(56,189,248,0.15);">
+    <div style="max-width:1000px; margin:0 auto;">
+      <div class="kicker" style="color:#7dd3fc;">LOCATION</div>
+      <h2 style="font-size:1.5rem; font-weight:700; margin-bottom:28px; color:#f1f5f9;">회사 정보</h2>
+      <div class="loc-grid">
+        <div style="background:rgba(12,16,23,0.5); border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:28px 32px; display:flex; flex-direction:column; justify-content:space-evenly; min-height:320px;">
+          <div class="info-row"><div style="color:#94a3b8; font-weight:600;">상호</div><div style="color:#e2e8f0;">주식회사 삼일이엔씨</div></div>
+          <div class="info-row"><div style="color:#94a3b8; font-weight:600;">대표이사</div><div style="color:#e2e8f0;">김진영</div></div>
+          <div class="info-row"><div style="color:#94a3b8; font-weight:600;">사업자번호</div><div style="color:#e2e8f0;">698-86-00820</div></div>
+          <div class="info-row"><div style="color:#94a3b8; font-weight:600;">주소</div><div style="color:#e2e8f0;">충청북도 청주시 남이면 양촌1길 34-23, 주1동</div></div>
+        </div>
+        <div style="border:1px solid rgba(255,255,255,0.08); border-radius:14px; overflow:hidden; min-height:320px;">
+          <iframe src="https://www.google.com/maps?q=%EC%B6%A9%EC%B2%AD%EB%B6%81%EB%8F%84%20%EC%B2%AD%EC%A3%BC%EC%8B%9C%20%EB%82%A8%EC%9D%B4%EB%A9%B4%20%EC%96%91%EC%B4%8C1%EA%B8%B8%2034-23&amp;output=embed&amp;hl=ko" style="width:100%; height:100%; min-height:320px; border:0; display:block; filter:grayscale(0.2) contrast(1.05);" loading="lazy" title="삼일이엔씨 위치"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <dc-import name="Footer" hint-size="100%,140px"></dc-import>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1100}}"></script>
+</body>
+</html>
